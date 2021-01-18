@@ -1,26 +1,23 @@
-
+const Player = require('./player');
 
 class GameManager {
-  constructor(){
-    const entities = [];
+  constructor(io){
+    this.io = io;
+    this.players = {};
 
     setInterval(this.update.bind(this), 1000/60);
   }
 
-  addPlayer(){
-
+  addPlayer(id, username){
+    this.players[id] = new Player(id, username, 50, 50);
   }
 
-  removePlayer(){
-
+  removePlayer(id){
+    delete this.players[id];
   }
 
-  handleInput(){
+  handleInput(id, { dirX, dirY }){
 
-  }
-  
-  getState(){
-    return entities;
   }
 
   update(){
