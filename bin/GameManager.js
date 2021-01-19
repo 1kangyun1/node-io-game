@@ -4,6 +4,8 @@ class GameManager {
   constructor(io){
     this.io = io;
     this.players = {};
+    this.lastUpdateTime = Date.now();
+
 
     setInterval(this.update.bind(this), 1000/60);
   }
@@ -16,12 +18,22 @@ class GameManager {
     delete this.players[id];
   }
 
-  handleInput(id, { dirX, dirY }){
-
+  handleInput(id, dir){
+    if (this.players[id]) {
+      this.players[id].setDirection(dir);
+    }
   }
 
   update(){
-    
+    const now = Date.now();
+    const dt = (now - this.lastUpdateTime) / 1000;
+    this.lastUpdateTime = now;
+
+    for(var player of this.players){
+      player.update(dt);
+    }
+
+    io.emit('gameUpdate', this.players);
   }
 }
 
