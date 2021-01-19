@@ -12,8 +12,8 @@ function socketHandler(io, socket) {
   /** receives dir json file containing x and y direction
    *  directions can be positive, 0, negative
    **/
-  socket.on('input', ( dir={ dirX, dirY } ) => 
-    {Game.handleInput(socket.id, dir)});
+  socket.on('movement', ( dir={ dirX, dirY } ) => 
+    {Game.handleMovement(socket.id, dir)});
 
   socket.on('disconnect', () => 
     {Game.removePlayer(socket.id)});

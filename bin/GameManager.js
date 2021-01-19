@@ -18,7 +18,7 @@ class GameManager {
     delete this.players[id];
   }
 
-  handleInput(id, dir){
+  handleMovement(id, dir){
     if (this.players[id]) {
       this.players[id].setDirection(dir);
     }
