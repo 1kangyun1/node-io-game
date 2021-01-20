@@ -41,9 +41,7 @@ class GameManager {
     const dt = (now - this.lastUpdateTime) / 1000;
     this.lastUpdateTime = now;
 
-    for(var player of this.players){
-      player.move(dt);
-    }
+    this.players.map(player => player.move(dt));
 
     this.io.emit('gameUpdate', this.players);
   }
