@@ -6,17 +6,18 @@ function socketHandler(io, socket) {
   const Game = new GameManager(io);
 
   //receives json file containing username string
-  socket.on('join', ( { username } ) => 
-    {Game.addPlayer(socket.id, 'test')});
+  socket.on('join', ( { username } ) => {
+    Game.addPlayer(socket.id, 'test')});
 
   /** receives dir json file containing x and y direction
    *  directions can be positive, 0, negative
    **/
-  socket.on('movement', ( dir={ dirX, dirY } ) => 
-    {Game.handleMovement(socket.id, dir)});
+  socket.on('movement', ( dir={ dirX, dirY } ) => {
+    Game.handleMovement(socket.id, dir)});
 
-  socket.on('disconnect', () => 
-    {Game.removePlayer(socket.id)});
+  socket.on('disconnect', () => {
+    console.log('user has disconnected');
+    Game.removePlayer(socket.id)});
 }
 
 module.exports = socketHandler;

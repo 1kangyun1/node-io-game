@@ -8,7 +8,7 @@ class Player{
     this.direction = { dirX:0, dirY:0 };
   }
 
-  update(dt){
+  move(dt){
     this.pos.x += dt * this.direction.dirX * 5;
     this.pos.y += dt * this.direction.dirX * 5;
   }

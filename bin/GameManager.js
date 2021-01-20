@@ -3,7 +3,7 @@ const Player = require('./player');
 class GameManager {
   constructor(io){
     this.io = io;
-    this.players = {};
+    this.players = [];
     this.lastUpdateTime = Date.now();
 
 
@@ -11,16 +11,28 @@ class GameManager {
   }
 
   addPlayer(id, username){
-    this.players[id] = new Player(id, username, 50, 50);
+    const index = this.players.findIndex(player => player.id === id);
+
+    if(index === -1){
+      const player = new Player(id, username, 50, 50);
+
+      this.players.push(player);
+    }
   }
 
   removePlayer(id){
-    delete this.players[id];
+    const index = this.players.findIndex(player => player.id === id);
+
+    if(index !== -1){
+      this.players.splice(index, 1);
+    }
   }
 
   handleMovement(id, dir){
-    if (this.players[id]) {
-      this.players[id].setDirection(dir);
+    const index = this.players.findIndex(player => player.id === id);
+
+    if (this.players[index]) {
+      this.players[index].setDirection(dir);
     }
   }
 
@@ -30,10 +42,10 @@ class GameManager {
     this.lastUpdateTime = now;
 
     for(var player of this.players){
-      player.update(dt);
+      player.move(dt);
     }
 
-    io.emit('gameUpdate', this.players);
+    this.io.emit('gameUpdate', this.players);
   }
 }
 
