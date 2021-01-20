@@ -9,8 +9,8 @@ class Player{
   }
 
   move(dt){
-    this.pos.x += dt * this.direction.dirX * 5;
-    this.pos.y += dt * this.direction.dirX * 5;
+    this.pos.x += dt * this.direction.dirX * 100;
+    this.pos.y += dt * this.direction.dirY * 100;
   }
 
   setDirection(dir){
