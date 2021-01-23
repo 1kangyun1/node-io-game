@@ -8,7 +8,7 @@ var app = require('../app');
 var debug = require('debug')('server:server');
 var http = require('http');
 const socketio = require('socket.io');
-const SocketHandler = require('./socketHandler.js');
+const SocketHandler = require('./SocketHandler.js');
 
 /**
  * Get port from environment and store in Express.
