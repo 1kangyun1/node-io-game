@@ -1,4 +1,4 @@
-const GameManager = require('./gameManager');
+const GameManager = require('./GameManager');
 
 function socketHandler(io, socket) {
   console.log('new user has connected');
