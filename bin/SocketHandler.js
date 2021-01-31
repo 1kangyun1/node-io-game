@@ -1,9 +1,5 @@
-const GameManager = require('./GameManager');
-
-function socketHandler(io, socket) {
+function socketHandler(Game, socket) {
   console.log('new user has connected');
-
-  const Game = new GameManager(io);
 
   //receives json file containing username string
   socket.on('join', ({ username }) => {

@@ -9,6 +9,7 @@ var debug = require('debug')('server:server');
 var http = require('http');
 const socketio = require('socket.io');
 const SocketHandler = require('./SocketHandler.js');
+const GameManager = require('./GameManager');
 
 /**
  * Get port from environment and store in Express.
@@ -34,7 +35,11 @@ const io = socketio(server, {
   }
 });
 
-io.on('connection', socket => SocketHandler(io, socket));
+const Game = new GameManager(io);
+
+io.on('connection', socket => {  
+  SocketHandler(Game, socket)
+});
 
 /**
  * Listen on provided port, on all network interfaces.
