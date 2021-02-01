@@ -1,8 +1,10 @@
+const Constant = require('../data/Constant');
 const Player = require('./Player');
 
 class GameManager {
   constructor(io){
     this.io = io;
+    //convert plays to json for faster search for update
     this.players = [];
     this.lastUpdateTime = Date.now();
 
@@ -36,6 +38,10 @@ class GameManager {
     }
   }
 
+  checkposition(id, pos={x,y}){
+
+  }
+
   movePlayer(player, dt){
     player.pos.x += dt * player.direction.dirX * player.speed;
     player.pos.y += dt * player.direction.dirY * player.speed;
@@ -48,7 +54,7 @@ class GameManager {
 
     this.players.forEach(player => this.movePlayer(player, dt));
 
-    this.io.emit('gameUpdate', this.players);
+    this.io.emit(Constant.MSG_TYPES.GAME_UPDATE, this.players);
   }
 }
 
