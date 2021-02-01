@@ -2,6 +2,7 @@ module.exports = Object.freeze({
   MAP_SIZE: 5000,
 
   PLAYER_SIZE: 50,
+  PLAYER_SPEED: 200,
 
   MSG_TYPES: {
     GAME_INFO: 'gameInfo',

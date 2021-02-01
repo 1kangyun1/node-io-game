@@ -29,7 +29,7 @@ class GameManager {
       this.players.splice(index, 1);
     }
   }
-
+/**
   handleMovement(id, dir){
     const index = this.players.findIndex(player => player.id === id);
 
@@ -37,23 +37,34 @@ class GameManager {
       this.players[index].direction = dir;
     }
   }
+  */
 
-  checkposition(id, pos={x,y}){
+  updateposition(id, {x,y}){
+    const index = this.players.findIndex(player => player.id === id);
 
+    if (this.players[index]) {
+      //placeholder for position validate js file
+      this.players[index].pos.x = Math.max(0, Math.min(Constants.MAP_SIZE, x));
+      this.players[index].pos.y = Math.max(0, Math.min(Constants.MAP_SIZE, y));
+    }
   }
 
+  /**
   movePlayer(player, dt){
     player.pos.x += dt * player.direction.dirX * player.speed;
     player.pos.y += dt * player.direction.dirY * player.speed;
   }
+  */
 
   update(){
+    /**
     const now = Date.now();
     const dt = (now - this.lastUpdateTime) / 1000;
     this.lastUpdateTime = now;
 
     this.players.forEach(player => this.movePlayer(player, dt));
-
+    */
+   
     this.io.emit(Constant.MSG_TYPES.GAME_UPDATE, this.players);
   }
 }

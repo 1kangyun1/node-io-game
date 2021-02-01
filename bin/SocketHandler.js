@@ -11,12 +11,9 @@ function socketHandler(Game, socket) {
     Game.addPlayer(socket.id, 'test');
   });
 
-  /** receives dir json file containing x and y direction
-   *  directions can be positive, 0, negative
-   **/
-  socket.on(Constant.MSG_TYPES.INPUT, (dir = { dirX, dirY }) => {
-    Game.handleMovement(socket.id, dir);
-    //Game.checkPosition(socket.id, pos);
+  // receives pos json file containing x and y position
+  socket.on(Constant.MSG_TYPES.INPUT, (pos = { x, y }) => {
+    Game.updatePosition(socket.id, pos);
   });
 
   socket.on('disconnect', () => {
