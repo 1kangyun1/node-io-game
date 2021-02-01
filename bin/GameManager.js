@@ -5,7 +5,7 @@ class GameManager {
   constructor(io){
     this.io = io;
     //convert plays to json for faster search for update
-    this.players = [];
+    this.players = {};
     this.lastUpdateTime = Date.now();
 
 
@@ -13,6 +13,7 @@ class GameManager {
   }
 
   addPlayer(id, username){
+    /**
     const index = this.players.findIndex(player => player.id === id);
 
     if(index === -1){
@@ -20,14 +21,21 @@ class GameManager {
 
       this.players.push(player);
     }
+    */
+
+    this.players[id] = new Player(id, username, 50, 50);
   }
 
   removePlayer(id){
+    /**
     const index = this.players.findIndex(player => player.id === id);
 
     if(index !== -1){
       this.players.splice(index, 1);
     }
+    */
+
+    delete this.players[id];
   }
 /**
   handleMovement(id, dir){
@@ -40,6 +48,7 @@ class GameManager {
   */
 
   updateposition(id, {x,y}){
+    /**
     const index = this.players.findIndex(player => player.id === id);
 
     if (this.players[index]) {
@@ -47,6 +56,10 @@ class GameManager {
       this.players[index].pos.x = Math.max(0, Math.min(Constants.MAP_SIZE, x));
       this.players[index].pos.y = Math.max(0, Math.min(Constants.MAP_SIZE, y));
     }
+    */
+
+    this.players[id].pos.x = Math.max(0, Math.min(Constants.MAP_SIZE, x));
+    this.players[id].pos.y = Math.max(0, Math.min(Constants.MAP_SIZE, y));
   }
 
   /**
