@@ -1,18 +1,19 @@
-const Constant = require('../data/Constant');
+const Constants = require('../data/Constants');
 const Map = require('../data/Map');
+const Movement = require('./control/Movement');
 
-function socketHandler(Game, socket) {
+function SocketHandler(Game, socket) {
   console.log('new user has connected');
 
   //receives json file containing username string 
   //and sends gamedata consisting constants and map info
   socket.on(Constant.MSG_TYPES.JOIN_GAME, ({ username }) => {
-    socket.emit(Constant.MSG_TYPES.GAME_INFO, {Constant, Map});
+    socket.emit(Constant.MSG_TYPES.GAME_INFO, {Constants, Map, Movement});
     Game.addPlayer(socket.id, 'test');
   });
 
   // receives pos json file containing x and y position
-  socket.on(Constant.MSG_TYPES.INPUT, (pos = { x, y }) => {
+  socket.on(Constant.MSG_TYPES.MOVEMENT, (pos = { x, y }) => {
     Game.updatePosition(socket.id, pos);
   });
 
@@ -22,4 +23,4 @@ function socketHandler(Game, socket) {
   });
 }
 
-module.exports = socketHandler;
+module.exports = SocketHandler;

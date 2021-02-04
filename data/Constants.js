@@ -8,6 +8,7 @@ module.exports = Object.freeze({
     GAME_INFO: 'gameInfo',
     JOIN_GAME: 'join',
     GAME_UPDATE: 'gameUpdate',
+    MOVEMENT: 'movement',
     INPUT: 'input',
     GAME_OVER: 'dead',
   },

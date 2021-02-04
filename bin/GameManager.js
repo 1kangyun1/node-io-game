@@ -1,4 +1,4 @@
-const Constant = require('../data/Constant');
+const Constant = require('../data/Constants');
 const Player = require('./Player');
 
 class GameManager {
@@ -78,7 +78,13 @@ class GameManager {
     this.players.forEach(player => this.movePlayer(player, dt));
     */
    
-    this.io.emit(Constant.MSG_TYPES.GAME_UPDATE, this.players);
+    this.io.emit(Constant.MSG_TYPES.GAME_UPDATE, this.createUpdate());
+  }
+
+  createUpdate = () => {
+    const playerList =  Object.values(this.players);
+    
+    return playerList.map(player => player.serialize());
   }
 }
 
