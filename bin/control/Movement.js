@@ -9,7 +9,7 @@ let lastUpdateTime = Date.now();
  * -1 if entity is overlapped
  * 1 if entity is running
  */
-function getNewPosition (pos={x,y}, dir={dirX,dirY}, state){
+function updatePosition (pos={x,y}, dir={dirX,dirY}, state){
   const now = Date.now();
   const dt = (now - this.lastUpdateTime) / 1000;
   lastUpdateTime = now;
@@ -20,4 +20,4 @@ function getNewPosition (pos={x,y}, dir={dirX,dirY}, state){
   };
 }
 
-module.exports = getNewPosition;
+module.exports = updatePosition;
