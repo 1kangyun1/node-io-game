@@ -1,4 +1,4 @@
-const Constant = require('../data/Constants');
+const Constants = require('../data/Constants');
 const Player = require('./Player');
 
 class GameManager {
@@ -47,7 +47,7 @@ class GameManager {
   }
   */
 
-  updateposition(id, {x,y}){
+  updatePosition(id, {x,y}){
     /**
     const index = this.players.findIndex(player => player.id === id);
 
@@ -78,7 +78,7 @@ class GameManager {
     this.players.forEach(player => this.movePlayer(player, dt));
     */
    
-    this.io.emit(Constant.MSG_TYPES.GAME_UPDATE, this.createUpdate());
+    this.io.emit(Constants.MSG_TYPES.GAME_UPDATE, this.createUpdate());
   }
 
   createUpdate = () => {
