@@ -1,8 +1,9 @@
 FROM node:14
 
-# Create app directory
-WORKDIR C:\Users\Brian\Desktop\github\io-game\server
+ENV PORT=8080
 
+# Create app directory
+WORKDIR /
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
@@ -16,6 +17,6 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-EXPOSE 8080
+EXPOSE $PORT
 
 CMD [ "node", "./bin/www" ]
