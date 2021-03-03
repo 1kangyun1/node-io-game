@@ -1,5 +1,6 @@
 const Constants = require('../data/Constants');
 const Player = require('./Player');
+const { uuid } = require('uuidv4');
 
 class GameManager {
   constructor(io){
@@ -7,6 +8,8 @@ class GameManager {
     //convert plays to json for faster search for update
     this.players = {};
     this.lastUpdateTime = Date.now();
+    this.counter = 0;
+    this.messageID = uuid();
 
 
     setInterval(this.update.bind(this), 1000/60);
@@ -77,14 +80,24 @@ class GameManager {
 
     this.players.forEach(player => this.movePlayer(player, dt));
     */
+
+    if(this.counter >= 60){
+      this.messageID = uuid();
+      this.counter = 0;
+    }
    
     this.io.emit(Constants.MSG_TYPES.GAME_UPDATE, this.createUpdate());
+
+    this.counter++;
   }
 
   createUpdate = () => {
     const playerList =  Object.values(this.players);
     
-    return playerList.map(player => player.serialize());
+    return {
+      id: this.messageID,
+      playerList: playerList.map(player => player.serialize())
+    };
   }
 }
 
