@@ -1,6 +1,6 @@
 const Constants = require('../data/Constants');
 const Player = require('./Player');
-const { uuid } = require('uuidv4');
+const { v4 } = require('uuid');
 
 class GameManager {
   constructor(io){
@@ -9,7 +9,7 @@ class GameManager {
     this.players = {};
     this.lastUpdateTime = Date.now();
     this.counter = 0;
-    this.messageID = uuid();
+    this.messageID = v4();
 
 
     setInterval(this.update.bind(this), 1000/60);
@@ -82,7 +82,7 @@ class GameManager {
     */
 
     if(this.counter >= 60){
-      this.messageID = uuid();
+      this.messageID = v4();
       this.counter = 0;
     }
    
