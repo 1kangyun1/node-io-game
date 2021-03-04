@@ -50,7 +50,7 @@ class GameManager {
   }
   */
 
-  updatePosition(id, {x,y}){
+  updatePosition(id, {playerX,playerY}){
     /**
     const index = this.players.findIndex(player => player.id === id);
 
@@ -61,8 +61,8 @@ class GameManager {
     }
     */
 
-    this.players[id].pos.x = Math.max(0, Math.min(Constants.MAP_SIZE, x));
-    this.players[id].pos.y = Math.max(0, Math.min(Constants.MAP_SIZE, y));
+    this.players[id].pos.x = Math.max(0, Math.min(Constants.MAP_SIZE, playerX));
+    this.players[id].pos.y = Math.max(0, Math.min(Constants.MAP_SIZE, playerY));
   }
 
   /**
